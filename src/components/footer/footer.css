@@ -1,0 +1,13 @@
+footer{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(106, 90, 249);
+    margin-top: 50px;
+}
+
+h1{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px;
+}

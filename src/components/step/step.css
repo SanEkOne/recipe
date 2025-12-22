@@ -1,0 +1,21 @@
+.step_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.step{
+    background: linear-gradient(90deg, #6a5af9, #8f7afe);
+    border-radius: 20px;
+    width: 60%;
+    display: flex;
+    justify-content: start;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(106, 90, 249, 0.35);
+}
+
+li{
+    color: white;
+    margin-bottom: 20px;
+}
