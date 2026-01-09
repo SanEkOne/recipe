@@ -4,18 +4,44 @@ import RecipeItem from '../recipe_items/resipe_item.jsx'
 import Ingredients from "../ingredients/ingredients.jsx";
 import Step from "../step/step.jsx"
 import Footer from "../footer/footer.jsx"
+import { createPortal } from 'react-dom';
+
+const Modal = ({ isOpen, onClose, modalContainer }) => {
+    if (!isOpen || !modalContainer) return null;
+
+    return createPortal(
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <h2 className="modal-title">Ошибка!</h2>
+                <p className="modal-text">Выберите рецепт.</p>
+                <button className="modal-button" onClick={onClose}>
+                    Ок
+                </button>
+            </div>
+        </div>,
+        modalContainer
+    );
+};
+
 
 function Recipe() {
     const [buttonText, setButtonText] = useState(null);
     const [ingredients, setIngredients] = useState([]);
     const [container_visibility, setContainer_visibility] = useState("main_container_invisible");
+    const [submitClicked, setSubmitClicked] = useState(false);
 
     const handleSelect = (title) => {
         setButtonText(title);
-
+        setSubmitClicked(true);
     }
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const handleSubmit = () => {
+        if(!submitClicked) {
+            setIsModalOpen(true);
+            return;
+        }
 
         if (buttonText === dranikiRecipe.title) {
             setIngredients(dranikiRecipe)
@@ -79,6 +105,7 @@ function Recipe() {
     };
 
 
+
     return (
         <div>
             <div className="choose_recipe_container">
@@ -87,11 +114,16 @@ function Recipe() {
                 <RecipeItem{...friedChampionsInSourCreamRecipe} onSelect={handleSelect}/>
             </div>
             <div className="button_container">
-                <button className="button" onClick={() => {
+                <button className="button" onClick={() => {  //disabled={!submitClicked}
                     handleSubmit()
                 }}>
                     {buttonText ? `Выбрать ${buttonText}` : "Выберите рецепт"}
                 </button>
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    modalContainer={document.getElementById("modal-root")}
+                />
             </div>
             <div className={container_visibility}>
                 <Ingredients {...ingredients} />

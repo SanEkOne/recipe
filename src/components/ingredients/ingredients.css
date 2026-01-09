@@ -1,10 +1,16 @@
-.container {
+.container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ingredients_container {
     margin-top: 70px;
-    margin-left: 70px;
     padding: 20px;
     width: 600px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     border-radius: 20px;
     background: linear-gradient(90deg, #6a5af9, #8f7afe);
     box-shadow: 0 8px 20px rgba(106, 90, 249, 0.35);
